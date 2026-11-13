@@ -1,0 +1,1202 @@
+{
+  "$defs": {
+    "ByPeriod": {
+      "properties": {
+        "games": {
+          "title": "Games",
+          "type": "integer"
+        },
+        "shot_games": {
+          "title": "Shot Games",
+          "type": "integer"
+        },
+        "rows": {
+          "items": {
+            "$ref": "#/$defs/PeriodRow"
+          },
+          "title": "Rows",
+          "type": "array"
+        },
+        "scored_first": {
+          "$ref": "#/$defs/Record"
+        },
+        "allowed_first": {
+          "$ref": "#/$defs/Record"
+        },
+        "first_goal_games": {
+          "title": "First Goal Games",
+          "type": "integer"
+        },
+        "leading_after_two": {
+          "$ref": "#/$defs/Record"
+        },
+        "tied_after_two": {
+          "$ref": "#/$defs/Record"
+        },
+        "trailing_after_two": {
+          "$ref": "#/$defs/Record"
+        }
+      },
+      "required": [
+        "games",
+        "shot_games",
+        "rows",
+        "scored_first",
+        "allowed_first",
+        "first_goal_games",
+        "leading_after_two",
+        "tied_after_two",
+        "trailing_after_two"
+      ],
+      "title": "ByPeriod",
+      "type": "object"
+    },
+    "Discipline": {
+      "properties": {
+        "games": {
+          "title": "Games",
+          "type": "integer"
+        },
+        "pim_per_game": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Pim Per Game"
+        },
+        "infractions_per_game": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Infractions Per Game"
+        },
+        "minors_per_game": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Minors Per Game"
+        },
+        "infractions": {
+          "items": {
+            "$ref": "#/$defs/InfractionCount"
+          },
+          "title": "Infractions",
+          "type": "array"
+        },
+        "other_infractions": {
+          "title": "Other Infractions",
+          "type": "integer"
+        },
+        "top_takers": {
+          "items": {
+            "$ref": "#/$defs/PenaltyTaker"
+          },
+          "title": "Top Takers",
+          "type": "array"
+        }
+      },
+      "required": [
+        "games",
+        "pim_per_game",
+        "infractions_per_game",
+        "minors_per_game",
+        "infractions",
+        "other_infractions",
+        "top_takers"
+      ],
+      "title": "Discipline",
+      "type": "object"
+    },
+    "Form": {
+      "properties": {
+        "last5": {
+          "items": {
+            "$ref": "#/$defs/GameResult"
+          },
+          "title": "Last5",
+          "type": "array"
+        },
+        "home": {
+          "$ref": "#/$defs/Record"
+        },
+        "road": {
+          "$ref": "#/$defs/Record"
+        },
+        "one_goal": {
+          "$ref": "#/$defs/Record"
+        },
+        "overtime": {
+          "$ref": "#/$defs/Record"
+        },
+        "opponents_win_pct": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Opponents Win Pct"
+        },
+        "opponents_games": {
+          "title": "Opponents Games",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "last5",
+        "home",
+        "road",
+        "one_goal",
+        "overtime",
+        "opponents_win_pct",
+        "opponents_games"
+      ],
+      "title": "Form",
+      "type": "object"
+    },
+    "GameResult": {
+      "properties": {
+        "game_id": {
+          "title": "Game Id",
+          "type": "integer"
+        },
+        "date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Date"
+        },
+        "home": {
+          "title": "Home",
+          "type": "boolean"
+        },
+        "opponent": {
+          "title": "Opponent",
+          "type": "string"
+        },
+        "gf": {
+          "title": "Gf",
+          "type": "integer"
+        },
+        "ga": {
+          "title": "Ga",
+          "type": "integer"
+        },
+        "result": {
+          "title": "Result",
+          "type": "string"
+        }
+      },
+      "required": [
+        "game_id",
+        "date",
+        "home",
+        "opponent",
+        "gf",
+        "ga",
+        "result"
+      ],
+      "title": "GameResult",
+      "type": "object"
+    },
+    "Goalie": {
+      "properties": {
+        "player_id": {
+          "title": "Player Id",
+          "type": "integer"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "gp": {
+          "title": "Gp",
+          "type": "integer"
+        },
+        "starts": {
+          "title": "Starts",
+          "type": "integer"
+        },
+        "minutes": {
+          "title": "Minutes",
+          "type": "integer"
+        },
+        "shots_against": {
+          "title": "Shots Against",
+          "type": "integer"
+        },
+        "goals_against": {
+          "title": "Goals Against",
+          "type": "integer"
+        },
+        "sv_pct": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Sv Pct"
+        },
+        "gaa": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Gaa"
+        },
+        "replaced": {
+          "title": "Replaced",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "player_id",
+        "name",
+        "gp",
+        "starts",
+        "minutes",
+        "shots_against",
+        "goals_against",
+        "sv_pct",
+        "gaa",
+        "replaced"
+      ],
+      "title": "Goalie",
+      "type": "object"
+    },
+    "GoalieStart": {
+      "properties": {
+        "game_id": {
+          "title": "Game Id",
+          "type": "integer"
+        },
+        "date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Date"
+        },
+        "weekday": {
+          "title": "Weekday",
+          "type": "string"
+        },
+        "home": {
+          "title": "Home",
+          "type": "boolean"
+        },
+        "goalie": {
+          "title": "Goalie",
+          "type": "string"
+        }
+      },
+      "required": [
+        "game_id",
+        "date",
+        "weekday",
+        "home",
+        "goalie"
+      ],
+      "title": "GoalieStart",
+      "type": "object"
+    },
+    "Goaltending": {
+      "properties": {
+        "games": {
+          "title": "Games",
+          "type": "integer"
+        },
+        "goalies": {
+          "items": {
+            "$ref": "#/$defs/Goalie"
+          },
+          "title": "Goalies",
+          "type": "array"
+        },
+        "recent_starts": {
+          "items": {
+            "$ref": "#/$defs/GoalieStart"
+          },
+          "title": "Recent Starts",
+          "type": "array"
+        }
+      },
+      "required": [
+        "games",
+        "goalies",
+        "recent_starts"
+      ],
+      "title": "Goaltending",
+      "type": "object"
+    },
+    "HeadToHead": {
+      "properties": {
+        "season": {
+          "title": "Season",
+          "type": "string"
+        },
+        "game_id": {
+          "title": "Game Id",
+          "type": "integer"
+        },
+        "date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Date"
+        },
+        "home": {
+          "title": "Home",
+          "type": "boolean"
+        },
+        "gf": {
+          "title": "Gf",
+          "type": "integer"
+        },
+        "ga": {
+          "title": "Ga",
+          "type": "integer"
+        },
+        "result": {
+          "title": "Result",
+          "type": "string"
+        },
+        "venue": {
+          "title": "Venue",
+          "type": "string"
+        }
+      },
+      "required": [
+        "season",
+        "game_id",
+        "date",
+        "home",
+        "gf",
+        "ga",
+        "result",
+        "venue"
+      ],
+      "title": "HeadToHead",
+      "type": "object"
+    },
+    "InfractionCount": {
+      "properties": {
+        "infraction": {
+          "title": "Infraction",
+          "type": "string"
+        },
+        "count": {
+          "title": "Count",
+          "type": "integer"
+        },
+        "per_game": {
+          "title": "Per Game",
+          "type": "number"
+        },
+        "league_per_game": {
+          "title": "League Per Game",
+          "type": "number"
+        }
+      },
+      "required": [
+        "infraction",
+        "count",
+        "per_game",
+        "league_per_game"
+      ],
+      "title": "InfractionCount",
+      "type": "object"
+    },
+    "LeagueRank": {
+      "properties": {
+        "metric": {
+          "title": "Metric",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "rank": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Rank"
+        },
+        "of": {
+          "title": "Of",
+          "type": "integer"
+        },
+        "higher_is_better": {
+          "title": "Higher Is Better",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "metric",
+        "value",
+        "rank",
+        "of",
+        "higher_is_better"
+      ],
+      "title": "LeagueRank",
+      "type": "object"
+    },
+    "National": {
+      "description": "Where the team sits nationally, beside UC: the ranks Where we stand shows.",
+      "properties": {
+        "team": {
+          "$ref": "#/$defs/NationalRank"
+        },
+        "uc": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/NationalRank"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "official_as_of": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Official As Of"
+        },
+        "line": {
+          "title": "Line",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "team",
+        "uc",
+        "official_as_of",
+        "line"
+      ],
+      "title": "National",
+      "type": "object"
+    },
+    "NationalRank": {
+      "properties": {
+        "team_id": {
+          "title": "Team Id",
+          "type": "integer"
+        },
+        "team": {
+          "title": "Team",
+          "type": "string"
+        },
+        "rank": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Rank"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "enum": [
+                "acha",
+                "rebuilt"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Source"
+        },
+        "of": {
+          "title": "Of",
+          "type": "integer"
+        },
+        "games": {
+          "title": "Games",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "team_id",
+        "team",
+        "rank",
+        "source",
+        "of",
+        "games"
+      ],
+      "title": "NationalRank",
+      "type": "object"
+    },
+    "PenaltyTaker": {
+      "properties": {
+        "player_id": {
+          "title": "Player Id",
+          "type": "integer"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "penalties": {
+          "title": "Penalties",
+          "type": "integer"
+        },
+        "pim": {
+          "title": "Pim",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "player_id",
+        "name",
+        "penalties",
+        "pim"
+      ],
+      "title": "PenaltyTaker",
+      "type": "object"
+    },
+    "PeriodRow": {
+      "properties": {
+        "period": {
+          "title": "Period",
+          "type": "string"
+        },
+        "gf": {
+          "title": "Gf",
+          "type": "integer"
+        },
+        "ga": {
+          "title": "Ga",
+          "type": "integer"
+        },
+        "sf": {
+          "title": "Sf",
+          "type": "integer"
+        },
+        "sa": {
+          "title": "Sa",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "period",
+        "gf",
+        "ga",
+        "sf",
+        "sa"
+      ],
+      "title": "PeriodRow",
+      "type": "object"
+    },
+    "Quality": {
+      "properties": {
+        "games": {
+          "title": "Games",
+          "type": "integer"
+        },
+        "full_box_scores": {
+          "title": "Full Box Scores",
+          "type": "integer"
+        },
+        "score_only": {
+          "title": "Score Only",
+          "type": "integer"
+        },
+        "partial": {
+          "title": "Partial",
+          "type": "integer"
+        },
+        "pp_entered": {
+          "title": "Pp Entered",
+          "type": "integer"
+        },
+        "special_teams_games": {
+          "title": "Special Teams Games",
+          "type": "integer"
+        },
+        "notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Notes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "games",
+        "full_box_scores",
+        "score_only",
+        "partial",
+        "pp_entered",
+        "special_teams_games",
+        "notes"
+      ],
+      "title": "Quality",
+      "type": "object"
+    },
+    "Record": {
+      "properties": {
+        "gp": {
+          "default": 0,
+          "title": "Gp",
+          "type": "integer"
+        },
+        "w": {
+          "default": 0,
+          "title": "W",
+          "type": "integer"
+        },
+        "l": {
+          "default": 0,
+          "title": "L",
+          "type": "integer"
+        },
+        "otl": {
+          "default": 0,
+          "title": "Otl",
+          "type": "integer"
+        },
+        "sol": {
+          "default": 0,
+          "title": "Sol",
+          "type": "integer"
+        },
+        "gf": {
+          "default": 0,
+          "title": "Gf",
+          "type": "integer"
+        },
+        "ga": {
+          "default": 0,
+          "title": "Ga",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "gp",
+        "w",
+        "l",
+        "otl",
+        "sol",
+        "gf",
+        "ga"
+      ],
+      "title": "Record",
+      "type": "object"
+    },
+    "Scorer": {
+      "properties": {
+        "player_id": {
+          "title": "Player Id",
+          "type": "integer"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "gp": {
+          "title": "Gp",
+          "type": "integer"
+        },
+        "g": {
+          "title": "G",
+          "type": "integer"
+        },
+        "a": {
+          "title": "A",
+          "type": "integer"
+        },
+        "p": {
+          "title": "P",
+          "type": "integer"
+        },
+        "pp_goals": {
+          "title": "Pp Goals",
+          "type": "integer"
+        },
+        "md1_rank": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Md1 Rank"
+        },
+        "md1_tied": {
+          "title": "Md1 Tied",
+          "type": "boolean"
+        },
+        "md1_points": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Md1 Points"
+        }
+      },
+      "required": [
+        "player_id",
+        "name",
+        "gp",
+        "g",
+        "a",
+        "p",
+        "pp_goals",
+        "md1_rank",
+        "md1_tied",
+        "md1_points"
+      ],
+      "title": "Scorer",
+      "type": "object"
+    },
+    "Scoring": {
+      "properties": {
+        "games": {
+          "title": "Games",
+          "type": "integer"
+        },
+        "goals": {
+          "title": "Goals",
+          "type": "integer"
+        },
+        "top": {
+          "items": {
+            "$ref": "#/$defs/Scorer"
+          },
+          "title": "Top",
+          "type": "array"
+        },
+        "top3_goal_share": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Top3 Goal Share"
+        },
+        "pp_goal_share": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Pp Goal Share"
+        },
+        "md1_skaters": {
+          "title": "Md1 Skaters",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "games",
+        "goals",
+        "top",
+        "top3_goal_share",
+        "pp_goal_share",
+        "md1_skaters"
+      ],
+      "title": "Scoring",
+      "type": "object"
+    },
+    "SeasonBlock": {
+      "properties": {
+        "season_id": {
+          "title": "Season Id",
+          "type": "integer"
+        },
+        "season": {
+          "title": "Season",
+          "type": "string"
+        },
+        "record": {
+          "$ref": "#/$defs/Record"
+        },
+        "quality": {
+          "$ref": "#/$defs/Quality"
+        },
+        "form": {
+          "$ref": "#/$defs/Form"
+        },
+        "by_period": {
+          "$ref": "#/$defs/ByPeriod"
+        },
+        "shots": {
+          "$ref": "#/$defs/Shots"
+        },
+        "special_teams": {
+          "$ref": "#/$defs/SpecialTeams"
+        },
+        "discipline": {
+          "$ref": "#/$defs/Discipline"
+        },
+        "scoring": {
+          "$ref": "#/$defs/Scoring"
+        },
+        "goaltending": {
+          "$ref": "#/$defs/Goaltending"
+        },
+        "ranks": {
+          "items": {
+            "$ref": "#/$defs/LeagueRank"
+          },
+          "title": "Ranks",
+          "type": "array"
+        }
+      },
+      "required": [
+        "season_id",
+        "season",
+        "record",
+        "quality",
+        "form",
+        "by_period",
+        "shots",
+        "special_teams",
+        "discipline",
+        "scoring",
+        "goaltending",
+        "ranks"
+      ],
+      "title": "SeasonBlock",
+      "type": "object"
+    },
+    "Shots": {
+      "properties": {
+        "games": {
+          "title": "Games",
+          "type": "integer"
+        },
+        "sf_per_game": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Sf Per Game"
+        },
+        "sa_per_game": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Sa Per Game"
+        },
+        "shot_share": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Shot Share"
+        }
+      },
+      "required": [
+        "games",
+        "sf_per_game",
+        "sa_per_game",
+        "shot_share"
+      ],
+      "title": "Shots",
+      "type": "object"
+    },
+    "SpecialTeams": {
+      "properties": {
+        "games": {
+          "title": "Games",
+          "type": "integer"
+        },
+        "pp_opportunities": {
+          "title": "Pp Opportunities",
+          "type": "integer"
+        },
+        "pp_goals": {
+          "title": "Pp Goals",
+          "type": "integer"
+        },
+        "pp_pct": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Pp Pct"
+        },
+        "pk_opportunities": {
+          "title": "Pk Opportunities",
+          "type": "integer"
+        },
+        "pp_goals_against": {
+          "title": "Pp Goals Against",
+          "type": "integer"
+        },
+        "pk_pct": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Pk Pct"
+        },
+        "pp_minutes_per_game": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Pp Minutes Per Game"
+        },
+        "pk_minutes_per_game": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Pk Minutes Per Game"
+        },
+        "pp_goals_per_60": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Pp Goals Per 60"
+        },
+        "sh_goals": {
+          "title": "Sh Goals",
+          "type": "integer"
+        },
+        "sh_goals_against": {
+          "title": "Sh Goals Against",
+          "type": "integer"
+        },
+        "entered_disagrees": {
+          "title": "Entered Disagrees",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "games",
+        "pp_opportunities",
+        "pp_goals",
+        "pp_pct",
+        "pk_opportunities",
+        "pp_goals_against",
+        "pk_pct",
+        "pp_minutes_per_game",
+        "pk_minutes_per_game",
+        "pp_goals_per_60",
+        "sh_goals",
+        "sh_goals_against",
+        "entered_disagrees"
+      ],
+      "title": "SpecialTeams",
+      "type": "object"
+    },
+    "UpcomingGame": {
+      "properties": {
+        "game_id": {
+          "title": "Game Id",
+          "type": "integer"
+        },
+        "date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Date"
+        },
+        "home": {
+          "title": "Home",
+          "type": "boolean"
+        },
+        "opponent_id": {
+          "title": "Opponent Id",
+          "type": "integer"
+        },
+        "opponent": {
+          "title": "Opponent",
+          "type": "string"
+        }
+      },
+      "required": [
+        "game_id",
+        "date",
+        "home",
+        "opponent_id",
+        "opponent"
+      ],
+      "title": "UpcomingGame",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "team_id": {
+      "title": "Team Id",
+      "type": "integer"
+    },
+    "team": {
+      "title": "Team",
+      "type": "string"
+    },
+    "division": {
+      "title": "Division",
+      "type": "string"
+    },
+    "built_at": {
+      "format": "date-time",
+      "title": "Built At",
+      "type": "string"
+    },
+    "current": {
+      "$ref": "#/$defs/SeasonBlock"
+    },
+    "prior": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SeasonBlock"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "head_to_head": {
+      "items": {
+        "$ref": "#/$defs/HeadToHead"
+      },
+      "title": "Head To Head",
+      "type": "array"
+    },
+    "next_games": {
+      "items": {
+        "$ref": "#/$defs/UpcomingGame"
+      },
+      "title": "Next Games",
+      "type": "array"
+    },
+    "national": {
+      "$ref": "#/$defs/National"
+    }
+  },
+  "required": [
+    "team_id",
+    "team",
+    "division",
+    "built_at",
+    "current",
+    "prior",
+    "head_to_head",
+    "next_games",
+    "national"
+  ],
+  "title": "ScoutingReport",
+  "type": "object"
+}

@@ -1,0 +1,547 @@
+{
+  "$defs": {
+    "BaseRate": {
+      "description": "Of the teams ranked ``low``-``high`` on the same date in past seasons, how many\nfinished in the top 24. History, not a prediction (the user's choice for M6).",
+      "properties": {
+        "seasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Seasons",
+          "type": "array"
+        },
+        "on": {
+          "title": "On",
+          "type": "string"
+        },
+        "low": {
+          "title": "Low",
+          "type": "integer"
+        },
+        "high": {
+          "title": "High",
+          "type": "integer"
+        },
+        "teams": {
+          "title": "Teams",
+          "type": "integer"
+        },
+        "made_line": {
+          "title": "Made Line",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "seasons",
+        "on",
+        "low",
+        "high",
+        "teams",
+        "made_line"
+      ],
+      "title": "BaseRate",
+      "type": "object"
+    },
+    "RankCheck": {
+      "properties": {
+        "as_of": {
+          "format": "date",
+          "title": "As Of",
+          "type": "string"
+        },
+        "our_games_through": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Our Games Through"
+        },
+        "teams": {
+          "title": "Teams",
+          "type": "integer"
+        },
+        "agree_exact": {
+          "title": "Agree Exact",
+          "type": "integer"
+        },
+        "within_2": {
+          "title": "Within 2",
+          "type": "integer"
+        },
+        "top24_match": {
+          "title": "Top24 Match",
+          "type": "boolean"
+        },
+        "differences": {
+          "items": {
+            "$ref": "#/$defs/RankDifference"
+          },
+          "title": "Differences",
+          "type": "array"
+        }
+      },
+      "required": [
+        "as_of",
+        "our_games_through",
+        "teams",
+        "agree_exact",
+        "within_2",
+        "top24_match",
+        "differences"
+      ],
+      "title": "RankCheck",
+      "type": "object"
+    },
+    "RankDifference": {
+      "properties": {
+        "team_id": {
+          "title": "Team Id",
+          "type": "integer"
+        },
+        "team": {
+          "title": "Team",
+          "type": "string"
+        },
+        "official": {
+          "title": "Official",
+          "type": "integer"
+        },
+        "rebuilt": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Rebuilt"
+        },
+        "cause": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Cause"
+        }
+      },
+      "required": [
+        "team_id",
+        "team",
+        "official",
+        "rebuilt",
+        "cause"
+      ],
+      "title": "RankDifference",
+      "type": "object"
+    },
+    "RankingRow": {
+      "properties": {
+        "team_id": {
+          "title": "Team Id",
+          "type": "integer"
+        },
+        "team": {
+          "title": "Team",
+          "type": "string"
+        },
+        "games": {
+          "title": "Games",
+          "type": "integer"
+        },
+        "rank": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Rank"
+        },
+        "rank_a": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Rank A"
+        },
+        "rank_b": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Rank B"
+        },
+        "avg": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Avg"
+        },
+        "rating_a": {
+          "title": "Rating A",
+          "type": "number"
+        },
+        "rating_b": {
+          "title": "Rating B",
+          "type": "number"
+        },
+        "schedule": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Schedule"
+        },
+        "w": {
+          "title": "W",
+          "type": "integer"
+        },
+        "l": {
+          "title": "L",
+          "type": "integer"
+        },
+        "t": {
+          "title": "T",
+          "type": "integer"
+        },
+        "otw": {
+          "title": "Otw",
+          "type": "integer"
+        },
+        "otl": {
+          "title": "Otl",
+          "type": "integer"
+        },
+        "league": {
+          "title": "League",
+          "type": "string"
+        },
+        "official_rank": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Official Rank"
+        },
+        "official_rank_a": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Official Rank A"
+        },
+        "official_rank_b": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Official Rank B"
+        },
+        "official_avg": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Official Avg"
+        }
+      },
+      "required": [
+        "team_id",
+        "team",
+        "games",
+        "rank",
+        "rank_a",
+        "rank_b",
+        "avg",
+        "rating_a",
+        "rating_b",
+        "schedule",
+        "w",
+        "l",
+        "t",
+        "otw",
+        "otl",
+        "league",
+        "official_rank",
+        "official_rank_a",
+        "official_rank_b",
+        "official_avg"
+      ],
+      "title": "RankingRow",
+      "type": "object"
+    },
+    "RemainingGame": {
+      "properties": {
+        "game_id": {
+          "title": "Game Id",
+          "type": "integer"
+        },
+        "date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Date"
+        },
+        "home": {
+          "title": "Home",
+          "type": "boolean"
+        },
+        "opponent_id": {
+          "title": "Opponent Id",
+          "type": "integer"
+        },
+        "opponent": {
+          "title": "Opponent",
+          "type": "string"
+        },
+        "opponent_rank": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Opponent Rank"
+        },
+        "opponent_official_rank": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Opponent Official Rank"
+        }
+      },
+      "required": [
+        "game_id",
+        "date",
+        "home",
+        "opponent_id",
+        "opponent",
+        "opponent_rank",
+        "opponent_official_rank"
+      ],
+      "title": "RemainingGame",
+      "type": "object"
+    },
+    "TeamStanding": {
+      "properties": {
+        "team_id": {
+          "title": "Team Id",
+          "type": "integer"
+        },
+        "team": {
+          "title": "Team",
+          "type": "string"
+        },
+        "rank": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Rank"
+        },
+        "official_rank": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Official Rank"
+        },
+        "places_from_line": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Places From Line"
+        },
+        "remaining": {
+          "items": {
+            "$ref": "#/$defs/RemainingGame"
+          },
+          "title": "Remaining",
+          "type": "array"
+        },
+        "base_rate": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BaseRate"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "team_id",
+        "team",
+        "rank",
+        "official_rank",
+        "places_from_line",
+        "remaining",
+        "base_rate"
+      ],
+      "title": "TeamStanding",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "season_id": {
+      "title": "Season Id",
+      "type": "integer"
+    },
+    "season": {
+      "title": "Season",
+      "type": "string"
+    },
+    "built_at": {
+      "format": "date-time",
+      "title": "Built At",
+      "type": "string"
+    },
+    "games_through": {
+      "anyOf": [
+        {
+          "format": "date",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Games Through"
+    },
+    "games": {
+      "title": "Games",
+      "type": "integer"
+    },
+    "median_games": {
+      "title": "Median Games",
+      "type": "number"
+    },
+    "line": {
+      "title": "Line",
+      "type": "integer"
+    },
+    "rows": {
+      "items": {
+        "$ref": "#/$defs/RankingRow"
+      },
+      "title": "Rows",
+      "type": "array"
+    },
+    "official_as_of": {
+      "anyOf": [
+        {
+          "format": "date",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Official As Of"
+    },
+    "uc": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TeamStanding"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/RankCheck"
+      },
+      "title": "Checks",
+      "type": "array"
+    }
+  },
+  "required": [
+    "season_id",
+    "season",
+    "built_at",
+    "games_through",
+    "games",
+    "median_games",
+    "line",
+    "rows",
+    "official_as_of",
+    "uc",
+    "checks"
+  ],
+  "title": "RankingsReport",
+  "type": "object"
+}

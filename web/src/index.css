@@ -1,0 +1,189 @@
+@import "tailwindcss";
+
+/* Tokens. Charts and text are written against roles, never raw hex.
+   Series pair validated with the dataviz validator (blue/red, both modes). */
+:root {
+  color-scheme: light;
+  --surface: #ffffff;
+  --page: #f4f4f2;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --muted: #7d7b75;
+  --hairline: #e1e0d9;
+  --axis: #c3c2b7;
+  --band: #111111;
+  --band-ink: #f4f4f2;
+  --accent: #c8102e;
+  --series-for: #2a78d6;
+  --series-against: #e34948;
+  --notice: #fff6db;
+  --notice-ink: #5b4300;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --surface: #161615;
+    --page: #0d0d0d;
+    --ink: #f0efec;
+    --ink-2: #c3c2b7;
+    --muted: #8f8d86;
+    --hairline: #2c2c2a;
+    --axis: #383835;
+    --band: #000000;
+    --band-ink: #f0efec;
+    --accent: #e0414f;
+    --series-for: #3987e5;
+    --series-against: #e66767;
+    --notice: #2e2610;
+    --notice-ink: #f1d58a;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --surface: #161615;
+  --page: #0d0d0d;
+  --ink: #f0efec;
+  --ink-2: #c3c2b7;
+  --muted: #8f8d86;
+  --hairline: #2c2c2a;
+  --axis: #383835;
+  --band: #000000;
+  --band-ink: #f0efec;
+  --accent: #e0414f;
+  --series-for: #3987e5;
+  --series-against: #e66767;
+  --notice: #2e2610;
+  --notice-ink: #f1d58a;
+}
+
+html,
+body {
+  background: var(--page);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Chart fills from tokens (CSS beats Recharts' presentation attributes). */
+.bar-for .recharts-rectangle {
+  fill: var(--series-for);
+}
+.bar-against .recharts-rectangle {
+  fill: var(--series-against);
+}
+
+table.data {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+}
+table.data th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--ink-2);
+  border-bottom: 1px solid var(--axis);
+  padding: 2px 6px 2px 0;
+  white-space: nowrap;
+}
+table.data td {
+  border-bottom: 1px solid var(--hairline);
+  padding: 2px 6px 2px 0;
+  font-variant-numeric: tabular-nums;
+}
+table.data .r {
+  text-align: right;
+  /* A record like "4-0-2-0 (28-19)" must not break mid-number on a phone. */
+  white-space: nowrap;
+}
+
+/* --- print: US Letter, two pages, always light ---------------------------- */
+@page {
+  size: letter;
+  margin: 0.4in 0.45in 0.55in;
+}
+
+@media print {
+  :root,
+  :root[data-theme="dark"] {
+    color-scheme: light;
+    --surface: #ffffff;
+    --page: #ffffff;
+    --ink: #000000;
+    --ink-2: #3a3936;
+    --muted: #5f5d58;
+    --hairline: #dddcd5;
+    --axis: #b5b4ab;
+    --band: #111111;
+    --band-ink: #ffffff;
+    --accent: #c8102e;
+    --series-for: #2a78d6;
+    --series-against: #e34948;
+    --notice: #fff6db;
+    --notice-ink: #5b4300;
+  }
+  html,
+  body {
+    font-size: 9.5pt;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .sheet {
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+  }
+  .page-break {
+    break-before: page;
+  }
+  section,
+  .keep {
+    break-inside: avoid;
+  }
+  section.split {
+    break-inside: auto;
+  }
+  section h2,
+  table.data thead,
+  table.data tr {
+    break-inside: avoid;
+    break-after: avoid-page;
+  }
+  table.data tr {
+    break-after: auto;
+  }
+  .flow {
+    page: flow;
+  }
+}
+
+/* A sheet whose length grows with the season (special teams) flows from page to page, so its
+   footer lives in the page margin: the same disclaimer, how current the data is (set by the
+   app as --print-freshness), the team (set by the page as --print-team) and a real page count. */
+@page flow {
+  size: letter;
+  margin: 0.4in 0.45in 0.7in;
+  @bottom-left {
+    content: "Independent student project — not affiliated with or endorsed by the University of Cincinnati or the ACHA. Computed from the league's public game records; derived figures are estimates and say how many games they rest on. Data courtesy of the ACHA and FloHockey.";
+    font: 6pt system-ui, "Segoe UI", sans-serif;
+    color: #5f5d58;
+    vertical-align: top;
+    padding-top: 6pt;
+    width: 75%;
+  }
+  @bottom-right {
+    content: var(--print-freshness, "") " · " var(--print-team) " · page " counter(page) " of " counter(pages);
+    font: 6pt system-ui, "Segoe UI", sans-serif;
+    color: #5f5d58;
+    vertical-align: top;
+    padding-top: 6pt;
+  }
+}

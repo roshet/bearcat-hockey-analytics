@@ -1,0 +1,24 @@
+# Local development database.
+#   docker compose up -d
+# Port 5433 is used deliberately so this never collides with a Postgres
+# already listening on the host default.
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: bca-postgres
+    environment:
+      POSTGRES_USER: bca
+      POSTGRES_PASSWORD: bca
+      POSTGRES_DB: bca
+    ports:
+      - "5433:5432"
+    volumes:
+      - bca-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bca -d bca"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  bca-pgdata:

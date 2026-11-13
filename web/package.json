@@ -1,0 +1,31 @@
+{
+  "name": "bca-web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "typecheck": "tsc -b",
+    "test": "vitest run",
+    "gen:types": "json2ts -i src/types/report.schema.json -o src/types/report.ts --no-additionalProperties --bannerComment \"/* Generated from the Pydantic ScoutingReport model by npm run gen:types. Do not edit. */\" && json2ts -i src/types/detail.schema.json -o src/types/detail.ts --no-additionalProperties --bannerComment \"/* Generated from the Pydantic TeamDetailReport model by npm run gen:types. Do not edit. */\" && json2ts -i src/types/rankings.schema.json -o src/types/rankings.ts --no-additionalProperties --bannerComment \"/* Generated from the Pydantic RankingsReport model by npm run gen:types. Do not edit. */\""
+  },
+  "dependencies": {
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "recharts": "2.15.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.1.8",
+    "@testing-library/react": "16.3.0",
+    "@types/react": "19.1.6",
+    "@types/react-dom": "19.1.5",
+    "@vitejs/plugin-react": "4.5.0",
+    "jsdom": "26.1.0",
+    "json-schema-to-typescript": "15.0.4",
+    "tailwindcss": "4.1.8",
+    "typescript": "5.8.3",
+    "vite": "6.3.5",
+    "vitest": "3.2.0"
+  }
+}
